@@ -36,6 +36,7 @@
 
 <!-- Cursor Glow -->
 <div class="cursor-glow" id="cursorGlow"></div>
+<div class="nav-overlay" id="navOverlay"></div>
 
 <!-- Navigation -->
 <nav id="navbar">
@@ -318,7 +319,6 @@
       <ul>
         <li><a href="https://wa.me/919865855799" target="_blank">WhatsApp</a></li>
         <li><a href="tel:+919865855799">Call Support</a></li>
-        <li><a href="#contact">Contact Form</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -345,12 +345,20 @@ const navLinks = document.getElementById('nav-links');
 ham.addEventListener('click', () => {
   ham.classList.toggle('active');
   navLinks.classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('active');
   document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+});
+document.getElementById('navOverlay').addEventListener('click', () => {
+  ham.classList.remove('active');
+  navLinks.classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('active');
+  document.body.style.overflow = '';
 });
 navLinks.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => { 
     ham.classList.remove('active'); 
     navLinks.classList.remove('open');
+    document.getElementById('navOverlay').classList.remove('active');
     document.body.style.overflow = '';
   });
 });
