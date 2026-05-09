@@ -92,11 +92,21 @@
     </div>
     <div class="hero-visual">
       <div class="hero-img-main">
-        <img src="hero-villa.png" alt="Luxury villa by Pugal Associates in Salem" loading="eager"/>
+        <img src="images/hero-villa.png" alt="Luxury villa by Pugal Associates in Salem" loading="eager"/>
       </div>
       <div class="hero-floating-card">
-        <div class="hfc-num">4.5</div>
-        <div class="hfc-text"><strong>Star Rated</strong>128 Happy Clients</div>
+        <div class="hfc-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <div class="hfc-info">
+          <div class="hfc-row">
+            <span class="hfc-num">4.5</span>
+            <span class="hfc-label">Star Rated</span>
+          </div>
+          <div class="hfc-sub">128 Happy Clients</div>
+        </div>
       </div>
     </div>
   </div>
@@ -164,7 +174,7 @@
 <section id="about">
   <div class="about-grid">
     <div class="about-images reveal-left">
-        <img src="about-apartment.png" alt="Premium modern apartment project in Salem by Pugal Associates" loading="lazy"/>
+      <img src="images/about-apartment.png" alt="Premium modern apartment project in Salem by Pugal Associates" loading="lazy"/>
       <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&auto=format&fit=crop&q=80" alt="Luxury villa project in Salem" loading="lazy"/>
     </div>
     <div class="about-text">
@@ -364,9 +374,14 @@ navLinks.querySelectorAll('a').forEach(a => {
 
 // ─── Nav Scroll Effect ───
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 50);
-});
+const hero = document.getElementById('home');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    // When hero is NOT intersecting (user scrolled past it), add 'scrolled'
+    navbar.classList.toggle('scrolled', !entry.isIntersecting);
+  });
+}, { threshold: 0.1 }); // Trigger when 90% of hero is gone
+navObserver.observe(hero);
 
 // Scroll Progress Logic Removed
 
